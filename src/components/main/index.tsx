@@ -1,42 +1,43 @@
-import Searcher from "@elements/searcher";
+import MainPageComponent from "./component";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getFromApi, ApiServices } from "@utils/requests";
 
 const MAX_NUM_ITEMS = 50;
-const REQUEST_TIME = 500;
 
 const MainPage = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [elements, setElements] = useState<Character[]>();
+  const [characters, setCharacters] = useState<Character[]>([]);
   const numResults = useRef(MAX_NUM_ITEMS);
-  const requestTimeout = useRef<number>();
 
   const onSearchInput = useCallback(
-    (value: string) => setSearchValue(value),
+    (value: string) => getCharacters(value),
     [],
   );
 
-  useEffect(() => {
-    window.clearTimeout(requestTimeout.current);
-
-    requestTimeout.current = window.setTimeout(() => {
-      getFromApi(ApiServices.characters, {
-        limit: MAX_NUM_ITEMS.toString(),
-      }).then((response: Characters) => {
-        numResults.current = response.count;
-        setElements(response.results);
-      });
-    }, REQUEST_TIME);
-
-    return () => {
-      window.clearTimeout(requestTimeout.current);
+  const getCharacters = (searchValue?: string) => {
+    const params: { [key: string]: string } = {
+      limit: MAX_NUM_ITEMS.toString(),
     };
-  }, [searchValue]);
-  console.log(elements);
+
+    if (searchValue) {
+      params.nameStartsWith = searchValue;
+    }
+
+    getFromApi(ApiServices.characters, params).then((response: Characters) => {
+      numResults.current = response.count;
+      setCharacters(response.results);
+    });
+  };
+
+  useEffect(() => {
+    getCharacters();
+  }, []);
+
   return (
-    <>
-      <Searcher numResults={numResults.current} onInput={onSearchInput} />
-    </>
+    <MainPageComponent
+      characterList={characters}
+      numResults={numResults.current}
+      onSearchInput={onSearchInput}
+    />
   );
 };
 
