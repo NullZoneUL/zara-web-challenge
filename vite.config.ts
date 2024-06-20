@@ -15,6 +15,8 @@ export default defineConfig({
       "@elements": path.resolve(__dirname, "./src/elements"),
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@router": path.resolve(__dirname, "./src/router"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@api-key": path.resolve(__dirname, "./api-key.json"),
     },
   },
   css: {

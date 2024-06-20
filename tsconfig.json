@@ -26,9 +26,11 @@
       "@components/*": ["src/components/*"],
       "@elements/*": ["src/elements/*"],
       "@assets/*": ["src/assets/*"],
-      "@router/*": ["src/router/*"]
+      "@router/*": ["src/router/*"],
+      "@utils/*": ["src/utils/*"],
+      "@api-key": ["api-key.json"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "filesGlob": ["src/**/*.ts"]
 }
