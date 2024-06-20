@@ -12,7 +12,16 @@ export default defineConfig({
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "./src/components"),
+      "@elements": path.resolve(__dirname, "./src/elements"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
       "@router": path.resolve(__dirname, "./src/router"),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        includePaths: [path.resolve(__dirname, "src/assets/style")],
+      },
     },
   },
 });
