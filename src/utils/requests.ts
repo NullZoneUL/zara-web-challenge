@@ -1,7 +1,7 @@
 import md5 from "md5";
 import apiKey from "@api-key";
 
-const BASE_URL = "https://gateway.marvel.com:443/v1/public/";
+const BASE_URL = "https://gateway.marvel.com/v1/public/";
 
 export enum ApiServices {
   characters = "characters",
