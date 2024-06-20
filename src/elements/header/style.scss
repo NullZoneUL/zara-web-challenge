@@ -1,0 +1,45 @@
+@use "screen_ratios" as *;
+
+header {
+  $spacing: 16px;
+
+  background-color: var(--mv-black);
+  position: fixed;
+  width: 100vw;
+
+  .marvel-logo {
+    width: 130px;
+    padding: $spacing;
+  }
+
+  .fav-counter {
+    position: absolute;
+    right: $spacing;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--mv-white);
+
+    & > img {
+      vertical-align: middle;
+    }
+
+    & > span {
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+  }
+}
+
+@media screen and (min-width: $tabletMinWidth) {
+  $spacing: 48px;
+
+  header {
+    .marvel-logo {
+      margin-left: $spacing;
+    }
+
+    .fav-counter {
+      right: $spacing;
+    }
+  }
+}
