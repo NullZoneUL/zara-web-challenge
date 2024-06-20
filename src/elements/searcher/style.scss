@@ -1,0 +1,38 @@
+@use "font_sizes" as *;
+
+.searcher-container {
+  margin: 36px 16px 0 16px;
+
+  .searcher-input-container {
+    $iconSize: 12px;
+
+    border-bottom: 1px solid var(--mv-black);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+
+    & > img {
+      width: $iconSize;
+      height: $iconSize;
+      vertical-align: middle;
+      margin-right: $iconSize;
+    }
+
+    & > input {
+      width: calc(100% - $iconSize * 2);
+      text-transform: uppercase;
+      border: none;
+      color: var(--mv-black);
+      vertical-align: middle;
+      font-size: $font-size-s;
+      outline: none;
+
+      &::placeholder {
+        color: var(--mv-grey);
+      }
+    }
+  }
+
+  .searcher-num-results {
+    font-size: $font-size-xxs;
+  }
+}
