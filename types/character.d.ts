@@ -20,11 +20,6 @@ declare interface Character {
   urls: Url[];
 }
 
-interface Thumbnail {
-  path: string;
-  extension: string;
-}
-
 interface Comics {
   available: number;
   collectionURI: string;
@@ -53,7 +48,7 @@ interface Events {
   returned: number;
 }
 
-interface Item {
+declare interface Item {
   resourceURI: string;
   name: string;
   type?: string;

@@ -1,20 +1,20 @@
 import md5 from "md5";
 import apiKey from "@api-key";
 
-const BASE_URL = "https://gateway.marvel.com/v1/public/";
+export const BASE_API_URL = "https://gateway.marvel.com/v1/public/";
 
 export enum ApiServices {
   characters = "characters",
 }
 
 export const getFromApi = (
-  service: keyof typeof ApiServices,
-  parameters: { [key: string]: string },
+  url: string,
+  parameters?: { [key: string]: string },
 ) => {
   const timeStamp = Date.now();
   const hash = md5(`${timeStamp}${apiKey.private_key}${apiKey.public_key}`);
   return fetch(
-    `${BASE_URL}${service}?${formatParameters(parameters)}&ts=${timeStamp}&apikey=${apiKey.public_key}&hash=${hash}`,
+    `${url}?${parameters ? formatParameters(parameters) : ""}&ts=${timeStamp}&apikey=${apiKey.public_key}&hash=${hash}`,
   )
     .then((res) => res.json())
     .then((res) => res.data);

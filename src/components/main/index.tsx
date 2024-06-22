@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { getFromApi, ApiServices } from "@utils/requests";
+import { getFromApi, ApiServices, BASE_API_URL } from "@utils/requests";
 import { FavoritesContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 
@@ -37,10 +37,12 @@ const MainPage = () => {
       params.nameStartsWith = searchValue;
     }
 
-    getFromApi(ApiServices.characters, params).then((response: Characters) => {
-      numResults.current = response.count;
-      setCharacters(response.results);
-    });
+    getFromApi(`${BASE_API_URL}${ApiServices.characters}`, params).then(
+      (response: Characters) => {
+        numResults.current = response.count;
+        setCharacters(response.results);
+      },
+    );
   };
 
   useEffect(() => {
