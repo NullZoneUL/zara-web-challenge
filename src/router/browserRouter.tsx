@@ -17,6 +17,10 @@ const browserRouter = createBrowserRouter([
     element: <AppRouter route={Routes.favorites} />,
   },
   {
+    path: Routes.character,
+    element: <AppRouter route={Routes.character} />,
+  },
+  {
     path: "*",
     element: <AppRouter route={Routes.error} />,
   },
