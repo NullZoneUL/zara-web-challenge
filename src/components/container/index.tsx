@@ -1,5 +1,12 @@
 import Header from "@elements/header";
-import { ReactNode, createContext, useCallback, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { saveFavorites, getSavedFavorites } from "@utils/favorites";
 import "./style.scss";
 
 export const FavoritesContext = createContext<{
@@ -13,7 +20,7 @@ export const FavoritesContext = createContext<{
 });
 
 const AppContainer = ({ children }: { children: ReactNode }) => {
-  const [favorites, setFavorites] = useState<Character[]>([]);
+  const [favorites, setFavorites] = useState<Character[]>(getSavedFavorites());
 
   const modifyCharacterFavState = useCallback(
     (character: Character) => {
@@ -29,6 +36,10 @@ const AppContainer = ({ children }: { children: ReactNode }) => {
     },
     [favorites],
   );
+
+  useEffect(() => {
+    saveFavorites(favorites);
+  }, [favorites]);
 
   return (
     <FavoritesContext.Provider value={{ favorites, modifyCharacterFavState }}>

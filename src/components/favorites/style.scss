@@ -1,3 +1,4 @@
+@use "screen_ratios" as *;
 @use "font_sizes" as *;
 
 .favorites-container {
@@ -6,5 +7,26 @@
     font-size: $font-size-m;
     letter-spacing: -1px;
     margin: 24px 16px 0 16px;
+  }
+}
+
+@media screen and (min-width: $tabletMinWidth) {
+  $margin: 48px;
+
+  .favorites-container {
+    h1 {
+      margin: $margin;
+      margin-bottom: 0;
+    }
+
+    .searcher-container {
+      margin-top: $margin;
+    }
+  }
+}
+
+@media screen and (min-width: $computerMinWidth) {
+  .favorites-container h1 {
+    font-size: $font-size-l;
   }
 }
