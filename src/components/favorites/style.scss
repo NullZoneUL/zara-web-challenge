@@ -1,0 +1,10 @@
+@use "font_sizes" as *;
+
+.favorites-container {
+  h1 {
+    text-transform: uppercase;
+    font-size: $font-size-m;
+    letter-spacing: -1px;
+    margin: 24px 16px 0 16px;
+  }
+}

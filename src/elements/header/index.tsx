@@ -15,7 +15,7 @@ const Header = ({ numFavs }: HeaderProps) => {
         <img src={MarvelImage} className="marvel-logo" />
       </Link>
 
-      <Link to={`/${Routes.index}`}>
+      <Link to={`/${Routes.favorites}`}>
         <div className="fav-counter">
           <img src={HeartIcon} />
           <span>{numFavs}</span>

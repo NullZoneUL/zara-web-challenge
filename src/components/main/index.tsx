@@ -9,6 +9,7 @@ import {
 } from "react";
 import { getFromApi, ApiServices } from "@utils/requests";
 import { FavoritesContext } from "@components/container";
+import { createFavoritesIDsArray } from "@utils/favorites";
 
 const MAX_NUM_ITEMS = 50;
 
@@ -18,7 +19,7 @@ const MainPage = () => {
   const numResults = useRef(MAX_NUM_ITEMS);
 
   const favoritesIds = useMemo(
-    () => favorites.map((item) => item.id),
+    () => createFavoritesIDsArray(favorites),
     [favorites],
   );
 
