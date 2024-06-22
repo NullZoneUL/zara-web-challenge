@@ -1,12 +1,26 @@
 import CharacterListComponent from "@components/character-list";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { getFromApi, ApiServices } from "@utils/requests";
+import { FavoritesContext } from "@components/container";
 
 const MAX_NUM_ITEMS = 50;
 
 const MainPage = () => {
+  const { favorites } = useContext(FavoritesContext);
   const [characters, setCharacters] = useState<Character[]>([]);
   const numResults = useRef(MAX_NUM_ITEMS);
+
+  const favoritesIds = useMemo(
+    () => favorites.map((item) => item.id),
+    [favorites],
+  );
 
   const onSearchInput = useCallback(
     (value: string) => getCharacters(value),
@@ -37,6 +51,7 @@ const MainPage = () => {
       characterList={characters}
       numResults={numResults.current}
       onSearchInput={onSearchInput}
+      favoritesList={favoritesIds}
     />
   );
 };

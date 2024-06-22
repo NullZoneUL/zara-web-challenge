@@ -1,7 +1,9 @@
 import HeartIcon from "@assets/images/heart.svg";
 import EmptyHeartIcon from "@assets/images/empty-heart.svg";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "@router/utils";
+import { FavoritesContext } from "@components/container";
 import "./style.scss";
 
 interface CharacterItemProps {
@@ -10,6 +12,8 @@ interface CharacterItemProps {
 }
 
 const CharacterItem = ({ data, fav }: CharacterItemProps) => {
+  const { modifyCharacterFavState } = useContext(FavoritesContext);
+
   return (
     <div className="character-item-container">
       <Link to={`/${Routes.index}`}>
@@ -25,7 +29,7 @@ const CharacterItem = ({ data, fav }: CharacterItemProps) => {
           <img
             src={fav ? HeartIcon : EmptyHeartIcon}
             className={fav ? "fav-character-heart" : ""}
-            onClick={() => console.log("Todo!!!")}
+            onClick={() => modifyCharacterFavState(data)}
           />
         </div>
       </div>
