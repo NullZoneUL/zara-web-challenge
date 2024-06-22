@@ -1,4 +1,4 @@
-import MainPageComponent from "./component";
+import CharacterListComponent from "@components/character-list";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getFromApi, ApiServices } from "@utils/requests";
 
@@ -33,7 +33,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <MainPageComponent
+    <CharacterListComponent
       characterList={characters}
       numResults={numResults.current}
       onSearchInput={onSearchInput}

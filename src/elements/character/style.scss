@@ -1,0 +1,117 @@
+@use "font_sizes" as *;
+@use "screen_ratios" as *;
+@use "character_item_sizes" as *;
+
+$imageHeight: 190px;
+$noImageHeight: 146px;
+$separatorHeight: 5px;
+$transition: linear 0.2s;
+
+@property --gradientPercentage {
+  syntax: "<percentage>";
+  initial-value: 100%;
+  inherits: false;
+}
+
+.character-item-container {
+  width: $itemHeight;
+  color: white;
+  text-decoration: none;
+  font-size: $font-size-xs;
+
+  .character-item-image-container {
+    height: $imageHeight;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .character-item-no-image {
+    position: relative;
+
+    &::after {
+      content: "";
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(0, 0, 0, 0.6278886554621849) 30%,
+        rgba(0, 0, 0, 1) 35%
+      );
+      width: 100%;
+      height: $imageHeight - $noImageHeight + 30px;
+      display: block;
+      position: absolute;
+      bottom: 0;
+    }
+
+    & > img {
+      height: $noImageHeight;
+    }
+  }
+
+  .character-info-container {
+    margin-top: $separatorHeight;
+    background: var(--mv-black);
+    background: linear-gradient(135deg, var(--mv-black) 93%, transparent 81%);
+    position: relative;
+
+    &::before {
+      content: "";
+      background: linear-gradient(
+        135deg,
+        var(--mv-red) var(--gradientPercentage),
+        transparent 81%
+      );
+      width: 100%;
+      height: $separatorHeight;
+      display: block;
+      position: absolute;
+      top: -$separatorHeight;
+      transition:
+        height $transition,
+        --gradientPercentage $transition;
+    }
+
+    .character-info {
+      & > div {
+        display: inline-block;
+        padding: 16px 0 24px 16px;
+        max-width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        z-index: 1;
+        position: relative;
+      }
+
+      & > img {
+        position: absolute;
+        width: 12px;
+        right: 16px;
+        top: 19px;
+        cursor: pointer;
+        filter: none;
+        transition: filter $transition;
+      }
+    }
+  }
+
+  &:hover .character-info-container {
+    &::before {
+      height: calc(100% + $separatorHeight);
+      --gradientPercentage: 93%;
+    }
+
+    .character-info .fav-character-heart {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+@media screen and (min-width: $computerMinWidth) {
+  .character-item-container {
+    width: $itemHeightPC;
+  }
+}

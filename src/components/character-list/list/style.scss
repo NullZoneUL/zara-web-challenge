@@ -1,0 +1,16 @@
+@use "screen_ratios" as *;
+@use "character_item_sizes" as *;
+
+.character-list-container {
+  margin: 36px 16px 0 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax($itemHeight, 1fr));
+  justify-items: center;
+}
+
+@media screen and (min-width: $computerMinWidth) {
+  .character-list-container {
+    grid-template-columns: repeat(auto-fit, minmax($itemHeightPC, 1fr));
+  }
+}
