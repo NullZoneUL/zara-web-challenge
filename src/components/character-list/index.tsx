@@ -1,22 +1,23 @@
 import Searcher from "@elements/searcher";
+import CharacterList from "./list";
 
-interface MainPageComponentProps {
+interface CharacterListComponentProps {
   numResults: number;
   characterList: Character[];
   onSearchInput: (value: string) => void;
 }
 
-const MainPageComponent = ({
+const CharacterListComponent = ({
   numResults,
   characterList,
   onSearchInput,
-}: MainPageComponentProps) => {
-  console.log(characterList);
+}: CharacterListComponentProps) => {
   return (
     <>
       <Searcher numResults={numResults} onInput={onSearchInput} />
+      <CharacterList characterList={characterList} />
     </>
   );
 };
 
-export default MainPageComponent;
+export default CharacterListComponent;
