@@ -1,0 +1,74 @@
+@use "font_sizes" as *;
+@use "screen_ratios" as *;
+
+.comic-list-container {
+  & > h2 {
+    margin: 24px 16px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: $font-size-m;
+    letter-spacing: -1px;
+  }
+
+  .comic-list {
+    overflow-x: scroll;
+    margin-left: 16px;
+    white-space: nowrap;
+
+    .comic-lis-overflow {
+      margin-bottom: 10px;
+
+      .comic-item {
+        display: inline-block;
+        width: 165px;
+        margin-right: 16px;
+        white-space: initial;
+        vertical-align: top;
+
+        & > img {
+          width: 100%;
+          height: 247.5px;
+        }
+
+        .comic-info-container {
+          color: var(--mv-black);
+          margin-top: 12px;
+
+          .comic-name {
+            font-size: $font-size-s;
+            font-weight: bold;
+          }
+
+          .comic-year {
+            font-size: $font-size-xxs;
+            margin-top: 7px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tabletMinWidth) {
+  .comic-list-container .comic-list .comic-lis-overflow .comic-item {
+    width: 168.5px;
+
+    & > img {
+      height: 252.8px;
+    }
+  }
+}
+
+@media screen and (min-width: $computerMinWidth) {
+  .comic-list-container .comic-list {
+    margin-left: 0;
+
+    .comic-lis-overflow .comic-item {
+      width: 179.2px;
+
+      & > img {
+        height: 268.8px;
+      }
+    }
+  }
+}

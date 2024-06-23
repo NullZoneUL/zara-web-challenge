@@ -5,7 +5,7 @@ import { FavoritesContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 import "./style.scss";
 
-const FavoritesContainer = () => {
+const FavoritesPage = () => {
   const { favorites } = useContext(FavoritesContext);
   const [items, setItems] = useState(favorites);
 
@@ -34,4 +34,4 @@ const FavoritesContainer = () => {
   );
 };
 
-export default FavoritesContainer;
+export default FavoritesPage;

@@ -4,7 +4,7 @@ import { getComponentFromRoute, RouteKeys } from "./utils";
 
 const AppRouter = ({ route }: { route: RouteKeys }) => {
   const Page = getComponentFromRoute(route);
-  const props = useParams();
+  const props: any = useParams(); //As props could be any thing, this must be 'any'
 
   return (
     <AppContainer>

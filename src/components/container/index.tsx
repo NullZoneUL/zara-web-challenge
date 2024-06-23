@@ -19,8 +19,19 @@ export const FavoritesContext = createContext<{
   },
 });
 
+export const CharactersContext = createContext<{
+  characters: Character[];
+  setCharacters: (charactersList: Character[]) => void;
+}>({
+  characters: [],
+  setCharacters: () => {
+    /**/
+  },
+});
+
 const AppContainer = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Character[]>(getSavedFavorites());
+  const [characters, setCharacters] = useState<Character[]>([]);
 
   const modifyCharacterFavState = useCallback(
     (character: Character) => {
@@ -44,7 +55,9 @@ const AppContainer = ({ children }: { children: ReactNode }) => {
   return (
     <FavoritesContext.Provider value={{ favorites, modifyCharacterFavState }}>
       <Header numFavs={favorites.length} />
-      <main className="page-container">{children}</main>
+      <CharactersContext.Provider value={{ characters, setCharacters }}>
+        <main className="page-container">{children}</main>
+      </CharactersContext.Provider>
     </FavoritesContext.Provider>
   );
 };
