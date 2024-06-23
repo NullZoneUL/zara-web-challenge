@@ -1,21 +1,15 @@
 import CharacterListComponent from "@components/character-list";
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef } from "react";
 import { getFromApi, ApiServices, BASE_API_URL } from "@utils/requests";
-import { FavoritesContext } from "@components/container";
+import { FavoritesContext, CharactersContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 
 const MAX_NUM_ITEMS = 50;
 
 const MainPage = () => {
   const { favorites } = useContext(FavoritesContext);
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const { characters, setCharacters } = useContext(CharactersContext);
+
   const numResults = useRef(MAX_NUM_ITEMS);
 
   const favoritesIds = useMemo(
@@ -46,7 +40,7 @@ const MainPage = () => {
   };
 
   useEffect(() => {
-    getCharacters();
+    characters.length === 0 && getCharacters();
   }, []);
 
   return (
