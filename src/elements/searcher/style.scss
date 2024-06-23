@@ -1,3 +1,4 @@
+@use "screen_ratios" as *;
 @use "font_sizes" as *;
 
 .searcher-container {
@@ -34,5 +35,11 @@
 
   .searcher-num-results {
     font-size: $font-size-xxs;
+  }
+}
+
+@media screen and (min-width: $tabletMinWidth) {
+  .searcher-container {
+    margin: 48px 48px 0 48px;
   }
 }
