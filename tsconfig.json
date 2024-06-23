@@ -20,7 +20,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["node"],
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/components/*"],
