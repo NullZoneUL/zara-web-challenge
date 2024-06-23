@@ -3,6 +3,8 @@ import apiKey from "@api-key";
 
 export const BASE_API_URL = "https://gateway.marvel.com/v1/public/";
 
+export const MAX_NUM_CHARACTERS = 50;
+
 export enum ApiServices {
   characters = "characters",
 }
