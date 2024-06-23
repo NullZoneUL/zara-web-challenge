@@ -1,37 +1,126 @@
 @use "font_sizes" as *;
+@use "screen_ratios" as *;
 
 .character-detail-container {
-  .character-detail-info {
-    background: linear-gradient(135deg, var(--mv-black) 96%, transparent 81%);
-    color: var(--mv-white);
-    margin-top: -4px;
-    padding: 0 16px;
+  .character-detail-header {
+    background: linear-gradient(135deg, var(--mv-black) 98%, transparent 81%);
+    margin-bottom: 48px;
 
-    .character-detail-title {
-      padding: 24px 0;
-      position: relative;
-      display: flex;
-      align-items: center;
-
-      & > h1 {
-        font-size: $font-size-l;
-        text-transform: uppercase;
-        max-width: 90%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    .character-detail-header-content {
+      & > img {
+        width: 100%;
       }
 
+      .character-detail-info {
+        color: var(--mv-white);
+        margin-top: -4px;
+        padding: 0 16px;
+
+        .character-detail-info-center {
+          .character-detail-title {
+            padding: 24px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            & > h1 {
+              font-size: $font-size-l;
+              text-transform: uppercase;
+              max-width: 90%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+            & > img {
+              width: 24px;
+              position: absolute;
+              right: 0;
+              cursor: pointer;
+            }
+          }
+
+          & > p {
+            padding-bottom: 48px;
+            font-size: $font-size-s;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tabletMinWidth) {
+  .character-detail-container {
+    position: relative;
+    border-top: 1px solid var(--mv-dark-grey);
+
+    .character-detail-header .character-detail-header-content {
+      display: flex;
+
       & > img {
-        width: 24px;
-        position: absolute;
-        right: 0;
-        cursor: pointer;
+        width: 278px;
+      }
+
+      .character-detail-info {
+        display: inline-block;
+        width: calc(100% - 278px);
+        height: 278px;
+        vertical-align: top;
+        margin-top: 0px;
+        padding: 0 48px;
+
+        .character-detail-info-center {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+
+          .character-detail-title {
+            padding-top: 0;
+          }
+
+          & > p {
+            padding-bottom: 0;
+            max-height: 180px;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $computerMinWidth) {
+  $imageWidth: 320px;
+  $infoContainerWidth: 640px;
+
+  .character-detail-container {
+    .character-detail-header {
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--mv-black) 99%, transparent 81%);
+
+      .character-detail-header-content {
+        & > img {
+          width: $imageWidth;
+        }
+
+        .character-detail-info {
+          padding-right: 0;
+          width: $infoContainerWidth;
+        }
       }
     }
 
-    & > p {
-      padding-bottom: 48px;
+    .comic-list-container {
+      width: $imageWidth + $infoContainerWidth;
+      margin: 0 auto;
+
+      & > h2 {
+        margin-left: 0;
+        margin-right: 0;
+        font-size: $font-size-l;
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ import { FavoritesContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 import "./style.scss";
 
+const MAX_NUM_COMICS = 20;
+
 const CharacterDetailPage = () => {
   const { favorites, modifyCharacterFavState } = useContext(FavoritesContext);
   const data = getSelectedCharacter();
@@ -17,6 +19,11 @@ const CharacterDetailPage = () => {
   const favoritesIds = useMemo(
     () => createFavoritesIDsArray(favorites),
     [favorites],
+  );
+
+  const comicList = useMemo(
+    () => data.comics.items.slice(0, MAX_NUM_COMICS),
+    [data],
   );
 
   const onHeartClick = useCallback(() => {
@@ -34,18 +41,24 @@ const CharacterDetailPage = () => {
 
   return (
     <div className="character-detail-container">
-      <img src={`${data.thumbnail.path}.${data.thumbnail.extension}`} />
-      <div className="character-detail-info">
-        <div className="character-detail-title">
-          <h1>{data.name}</h1>
-          <HeartElement
-            fav={favoritesIds.indexOf(data.id) !== -1}
-            onClick={onHeartClick}
-          />
+      <div className="character-detail-header">
+        <div className="character-detail-header-content">
+          <img src={`${data.thumbnail.path}.${data.thumbnail.extension}`} />
+          <div className="character-detail-info">
+            <div className="character-detail-info-center">
+              <div className="character-detail-title">
+                <h1>{data.name}</h1>
+                <HeartElement
+                  fav={favoritesIds.indexOf(data.id) !== -1}
+                  onClick={onHeartClick}
+                />
+              </div>
+              <p>{data.description || Translations.no_description}</p>
+            </div>
+          </div>
         </div>
-        <p>{data.description || Translations.no_description}</p>
       </div>
-      <ComicList items={data.comics.items} />
+      {comicList?.length > 0 && <ComicList items={comicList} />}
     </div>
   );
 };
