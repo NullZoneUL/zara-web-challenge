@@ -6,11 +6,16 @@ import "./style.scss";
 interface SearcherProps {
   numResults: number;
   onInput: (value: string) => void;
+  defaultValue?: string;
 }
 
 const TIME_UPDATE = 300;
 
-const Searcher = ({ numResults, onInput }: SearcherProps) => {
+const Searcher = ({
+  numResults,
+  defaultValue = "",
+  onInput,
+}: SearcherProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const updateTimeout = useRef<number>();
 
@@ -36,6 +41,7 @@ const Searcher = ({ numResults, onInput }: SearcherProps) => {
           placeholder={Translations.search}
           onInput={onInput_}
           ref={inputRef}
+          defaultValue={defaultValue}
         />
       </div>
       <div className="searcher-num-results">{`${numResults} ${Translations.results}`}</div>

@@ -6,17 +6,23 @@ interface CharacterListComponentProps {
   characterList: Character[];
   favoritesList: number[];
   onSearchInput: (value: string) => void;
+  defaultValue?: string;
 }
 
 const CharacterListComponent = ({
   numResults,
   characterList,
   favoritesList,
+  defaultValue = "",
   onSearchInput,
 }: CharacterListComponentProps) => {
   return (
     <>
-      <Searcher numResults={numResults} onInput={onSearchInput} />
+      <Searcher
+        numResults={numResults}
+        onInput={onSearchInput}
+        defaultValue={defaultValue}
+      />
       <CharacterList
         characterList={characterList}
         favoritesList={favoritesList}

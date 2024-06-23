@@ -10,6 +10,9 @@ import { FavoritesContext, CharactersContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 import { EmptyCharacterID } from "@elements/character/character";
 
+//In order to preserve the last search value between navigation, the value has to be saved outside React flow
+let lastSearchInput = "";
+
 const MainPage = () => {
   const { favorites } = useContext(FavoritesContext);
   const { characters, setCharacters } = useContext(CharactersContext);
@@ -21,10 +24,10 @@ const MainPage = () => {
     [favorites],
   );
 
-  const onSearchInput = useCallback(
-    (value: string) => getCharacters(value),
-    [],
-  );
+  const onSearchInput = useCallback((value: string) => {
+    lastSearchInput = value;
+    getCharacters(value);
+  }, []);
 
   const getCharacters = (searchValue?: string) => {
     const params: { [key: string]: string } = {
@@ -59,6 +62,7 @@ const MainPage = () => {
       numResults={numResults.current}
       onSearchInput={onSearchInput}
       favoritesList={favoritesIds}
+      defaultValue={lastSearchInput}
     />
   );
 };
