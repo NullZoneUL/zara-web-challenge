@@ -3,5 +3,10 @@
   "search": "Search a character...",
   "favorites": "Favorites",
   "no_description": "No description available",
-  "comics": "Comics"
+  "comics": "Comics",
+  "error": {
+    "0": "API Error. Make sure you have the correct keys in your",
+    "1": "api-key.json",
+    "2": "file"
+  }
 }
