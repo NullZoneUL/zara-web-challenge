@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { saveFavorites, getSavedFavorites } from "@utils/favorites";
-import { EmptyCharacterItem } from "@elements/character/character";
+import { createEmptyCharactersArray } from "@utils/empty-characters-array";
 import { MAX_NUM_CHARACTERS } from "@utils/requests";
 import "./style.scss";
 
@@ -34,9 +34,7 @@ export const CharactersContext = createContext<{
 const AppContainer = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Character[]>(getSavedFavorites());
   const [characters, setCharacters] = useState<Character[]>(
-    [...Array(MAX_NUM_CHARACTERS).keys()].map(() => {
-      return { ...EmptyCharacterItem };
-    }),
+    createEmptyCharactersArray(MAX_NUM_CHARACTERS),
   );
 
   const modifyCharacterFavState = useCallback(

@@ -24,8 +24,12 @@ const ComicItem = ({ data }: ComicItemProps) => {
 
   useEffect(() => {
     getFromApi(data.resourceURI).then((response: Comic) => {
-      const imageInfo = response.results[0]?.images[0];
-      setImage(`${imageInfo.path}.${imageInfo.extension}`);
+      const results = response?.results;
+      if (results?.length > 0) {
+        const imageInfo = results[0]?.images;
+        imageInfo?.length > 0 &&
+          setImage(`${imageInfo[0].path}.${imageInfo[0].extension}`);
+      }
     });
   }, [data]);
 
