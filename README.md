@@ -37,10 +37,11 @@ Before starting the dev server or making a build it is necessary to add the file
 This file should be in the root project with the name ***api-key.json***
 
 This file should have your api keys internally with this format:
-{
+<br>
+**{
     "public_key": "your public key",
     "private_key": "your private key"
-}
+}**
 
 You can get the api keys by following the steps indicated here: https://developer.marvel.com/documentation/getting_started
 
