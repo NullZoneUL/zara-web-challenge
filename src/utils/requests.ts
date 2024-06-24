@@ -22,7 +22,7 @@ export const getFromApi = (
     .then((res) => res.data);
 };
 
-const formatParameters = (parameters: { [key: string]: string }) =>
+export const formatParameters = (parameters: { [key: string]: string }) =>
   JSON.stringify(parameters)
     .replace("{", "")
     .replace("}", "")

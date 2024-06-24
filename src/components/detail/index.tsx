@@ -64,7 +64,7 @@ const CharacterDetailPage = ({ id }: CharacterDetailPageProps) => {
           </div>
         </div>
       </div>
-      {comicList?.length > 0 && <ComicList items={comicList} />}
+      {comicList && comicList.length > 0 && <ComicList items={comicList} />}
     </div>
   );
 };
