@@ -64,3 +64,9 @@ By using this command you will generate a build of the project which can be used
 <br>
 The builds will be located in ***./dis*** directory.
 
+
+## **--- Running the tests ---**
+
+**-> pnpm run test**
+
+This command will execute all tests located in this project. You can find all of them in ***./tests*** folder located in root directory.
