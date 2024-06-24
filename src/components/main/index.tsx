@@ -1,5 +1,6 @@
 import CharacterListComponent from "@components/character-list";
-import { useCallback, useContext, useEffect, useMemo, useRef } from "react";
+import Translations from "@assets/translations/en.json";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   getFromApi,
   ApiServices,
@@ -9,14 +10,22 @@ import {
 import { FavoritesContext, CharactersContext } from "@components/container";
 import { createFavoritesIDsArray } from "@utils/favorites";
 import { EmptyCharacterID } from "@elements/character/character";
+import './style.scss';
 
 //In order to preserve the last search value between navigation, the value has to be saved outside React flow
 let lastSearchInput = "";
+
+enum API_STATES {
+  'PENDING',
+  'OK',
+  'ERROR'
+}
 
 const MainPage = () => {
   const { favorites } = useContext(FavoritesContext);
   const { characters, setCharacters } = useContext(CharactersContext);
 
+  const [state, setState] = useState(characters?.length > 0 ? API_STATES.OK : API_STATES.PENDING);
   const numResults = useRef(MAX_NUM_CHARACTERS);
 
   const favoritesIds = useMemo(
@@ -41,9 +50,12 @@ const MainPage = () => {
     getFromApi(`${BASE_API_URL}${ApiServices.characters}`, params).then(
       (response: Characters) => {
         numResults.current = response.count;
+        setState(API_STATES.OK);
         setCharacters(response.results);
       },
-    );
+    ).catch(() => {
+        setState(API_STATES.ERROR);
+    });
   };
 
   useEffect(() => {
@@ -55,6 +67,16 @@ const MainPage = () => {
       getCharacters();
     }
   }, []);
+
+  if(state === API_STATES.ERROR) {
+    return (
+      <div className="api-error">
+        {Translations.error[0]}
+        <span>{Translations.error[1]}</span>
+        {Translations.error[2]}
+      </div>
+    )
+  }
 
   return (
     <CharacterListComponent

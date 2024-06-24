@@ -1,0 +1,15 @@
+@use "font_sizes" as *;
+
+.api-error {
+    font-size: $font-size-l;
+    margin-top: 50px;
+    text-align: center;
+
+    & > span {
+        font-style: italic;
+
+        &::after, &::before {
+            content: ' ';
+        }
+    }
+}
