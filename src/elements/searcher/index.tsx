@@ -1,6 +1,6 @@
 import SearchIcon from "@assets/images/search.svg";
 import Translations from "@assets/translations/en.json";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.scss";
 
 interface SearcherProps {
@@ -16,13 +16,17 @@ const Searcher = ({
   defaultValue = "",
   onInput,
 }: SearcherProps) => {
+  const [inputValue, setInputValue] = useState(defaultValue);
   const inputRef = useRef<HTMLInputElement>(null);
   const updateTimeout = useRef<number>();
 
-  const onInput_ = () => {
+  const onInput_ = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputValue(value);
+
     window.clearTimeout(updateTimeout.current);
     updateTimeout.current = window.setTimeout(() => {
-      onInput(inputRef.current!.value);
+      onInput(value);
     }, TIME_UPDATE);
   };
 
@@ -41,7 +45,7 @@ const Searcher = ({
           placeholder={Translations.search}
           onInput={onInput_}
           ref={inputRef}
-          defaultValue={defaultValue}
+          value={inputValue}
         />
       </div>
       <div className="searcher-num-results">{`${numResults} ${Translations.results}`}</div>

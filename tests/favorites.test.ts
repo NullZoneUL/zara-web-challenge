@@ -12,11 +12,13 @@ describe("Favorites external functions test", () => {
 
   const mockGetItem = jest.fn();
   const mockSetItem = jest.fn();
-  Object.defineProperty(window, "localStorage", {
-    value: {
-      getItem: (...args: string[]) => mockGetItem(...args),
-      setItem: (...args: string[]) => mockSetItem(...args),
-    },
+  beforeEach(() => {
+    jest.spyOn(Storage.prototype, "getItem").mockImplementation(mockGetItem);
+    jest.spyOn(Storage.prototype, "setItem").mockImplementation(mockSetItem);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test("Create favorites IDs array", () => {
